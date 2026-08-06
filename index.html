@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FretPulse - Smart Multi-Instrument Tuner</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <header>
+        <h1>FretPulse</h1>
+        <p>Professional Multi-Instrument Web Tuner</p>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <div class="control-group">
+                <label for="instrumentSelect">Instrument</label>
+                <select id="instrumentSelect">
+                    <option value="acoustic">Acoustic Guitar (6 String)</option>
+                    <option value="electric">Electric Guitar (6 String)</option>
+                    <option value="ukulele">Ukulele (4 String)</option>
+                    <option value="bass">Bass Guitar (4 String)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="tuningSelect">Tuning Preset</label>
+                <select id="tuningSelect">
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Pitch A4 <span id="a4ValDisplay" class="freq-badge">440 Hz</span></label>
+                <div class="calibration-controls">
+                    <input type="range" id="a4Slider" min="430" max="450" value="440" step="1">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Mode</label>
+                <div class="btn-toggle-group">
+                    <button id="btnAuto" class="active">Auto</button>
+                    <button id="btnManual">Manual</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="customEditor" class="custom-editor">
+        </div>
+        <div class="display-card">
+            <div class="gauge-container">
+                <div class="gauge-arc"></div>
+                <div id="needle" class="gauge-needle"></div>
+                <div class="gauge-center-dot"></div>
+            </div>
+
+            <div id="noteDisplay" class="note-display">--</div>
+            <div id="centsDisplay" class="cents-display">0 Cents</div>
+            <div id="freqDisplay" class="freq-display">0.0 Hz</div>
+            <div id="statusBadge" class="status-badge">Reference A4 = 440 Hz</div>
+
+            <button id="micBtn" class="mic-btn">Start Microphone</button>
+        </div>
+        <div class="neck-card">
+            <div class="neck-header">
+                <span style="font-weight: bold; color: var(--text-muted); font-size: 0.9rem;">INTERACTIVE FRETBOARD</span>
+                <span id="manualHint" style="font-size: 0.8rem; color: var(--accent-blue); display: none;">Click string peg to pluck reference tone</span>
+            </div>
+            <div class="fretboard-wrapper">
+                <div id="stringsContainer" class="strings-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>FretPulse <span id="appVersion"></span> • Professional Web Audio Tuner</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

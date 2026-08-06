@@ -1,0 +1,400 @@
+:root {
+    --bg-dark: #121418;
+    --card-bg: #1e222a;
+    --accent-green: #00e676;
+    --accent-red: #ff5252;
+    --accent-yellow: #ffb300;
+    --accent-blue: #00b0ff;
+    --text-light: #f1f5f9;
+    --text-muted: #94a3b8;
+    --fretboard-wood: #3a2212;
+    --string-silver: #cbd5e1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: var(--accent-blue);
+    letter-spacing: 1px;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Centered & Polished Controls Panel */
+.controls {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 1px solid #2e3440;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.control-group label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+/* Fix for long text display inside selects on desktop */
+select {
+    background: #2a2f3a;
+    color: var(--text-light);
+    border: 1px solid #3d4454;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    text-align-last: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+button, input[type="range"] {
+    background: #2a2f3a;
+    color: var(--text-light);
+    border: 1px solid #3d4454;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+select:hover, button:hover {
+    border-color: var(--accent-blue);
+}
+
+button.active {
+    background: var(--accent-blue);
+    color: #000;
+    font-weight: bold;
+}
+
+.btn-toggle-group {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+}
+
+.btn-toggle-group button {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+/* Calibration Controls */
+.calibration-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.calibration-controls input[type="range"] {
+    padding: 0;
+    height: 6px;
+    accent-color: var(--accent-blue);
+}
+
+.freq-badge {
+    font-weight: bold;
+    color: var(--accent-blue);
+}
+
+/* Main Gauge */
+.display-card {
+    background: var(--card-bg);
+    padding: 30px 20px;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    border: 1px solid #2e3440;
+}
+
+.gauge-container {
+    width: 280px;
+    height: 140px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.gauge-arc {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 12px solid #2a2f3a;
+    border-top-color: var(--accent-blue);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.gauge-needle {
+    width: 4px;
+    height: 110px;
+    background: var(--accent-red);
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 2px);
+    transform-origin: bottom center;
+    transform: rotate(0deg);
+    transition: transform 0.1s ease-out, background-color 0.2s;
+    border-radius: 2px;
+}
+
+.gauge-center-dot {
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -8px;
+    left: calc(50% - 8px);
+}
+
+.note-display {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 5px 0;
+    color: var(--text-light);
+    text-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.cents-display {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.freq-display {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.status-badge {
+    margin-top: 15px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: #2a2f3a;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+
+.status-badge.in-tune {
+    background: rgba(0, 230, 118, 0.2);
+    color: var(--accent-green);
+    border: 1px solid var(--accent-green);
+}
+
+/* Neck Visualizer */
+.neck-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 1px solid #2e3440;
+}
+
+.neck-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.fretboard-wrapper {
+    background: var(--fretboard-wood);
+    border-radius: 8px;
+    padding: 20px 10px;
+    border: 2px solid #5a3820;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+    position: relative;
+}
+
+.strings-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 220px;
+    position: relative;
+}
+
+.string-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    z-index: 2;
+    flex: 1;
+}
+
+.string-line {
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+}
+
+.string-wrapper.active .string-line {
+    background: var(--accent-blue);
+    box-shadow: 0 0 12px var(--accent-blue);
+    width: 5px;
+}
+
+.string-peg {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #2a2f3a;
+    border: 2px solid #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 15px;
+    color: var(--text-light);
+    transition: all 0.2s ease;
+}
+
+.string-wrapper.active .string-peg {
+    background: var(--accent-blue);
+    color: #000;
+    border-color: #fff;
+    transform: scale(1.15);
+}
+
+/* Custom Tuner Section */
+.custom-editor {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+    background: #181b20;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #2e3440;
+}
+
+.custom-editor.visible {
+    display: grid;
+}
+
+.custom-string-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.custom-string-select label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.custom-string-select select {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.85rem;
+}
+
+.mic-btn {
+    background: var(--accent-green);
+    color: #000;
+    font-weight: bold;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.mic-btn:hover {
+    opacity: 0.9;
+}
+
+.mic-btn.listening {
+    background: var(--accent-red);
+    color: #fff;
+}
+
+footer {
+    margin-top: 30px;
+    padding: 10px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
