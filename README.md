@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/sepandhaghighi/fretpulse/raw/logo/assets/logo.png" alt="FretPulse Logo" width="300">
+    <img src="https://github.com/sepandhaghighi/fretpulse/raw/main/assets/logo.png" alt="FretPulse Logo" width="300">
     <h1>FretPulse: Professional Multi-Instrument Tuner</h1>
     <br/>
     <a href="https://fretpulse.ir"><img src="https://img.shields.io/badge/demo-fretpulse.ir-green.svg"></a>
