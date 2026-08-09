@@ -1,4 +1,4 @@
-const APP_VERSION = 'v0.1';
+const FRETPULSE_VERSION = 'v0.1';
 const INSTRUMENTS = {
     acoustic: {
         name: 'Acoustic Guitar',
@@ -60,7 +60,7 @@ const INSTRUMENTS = {
 
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 let state = {
-    version: APP_VERSION,
+    version: FRETPULSE_VERSION,
     instrument: 'acoustic',
     tuning: 'Standard',
     customNotes: [],
