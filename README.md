@@ -66,13 +66,13 @@ To test FretPulse locally, you can use [Ghps](https://github.com/sepandhaghighi/
 Run:
 
 ```console
-ghps --port 8000
+ghps --port 5003
 ```
 
 Then open your browser and visit:
 
 ```console
-http://localhost:8000
+http://localhost:5003
 ```
 
 ## Issues & Bug Reports
