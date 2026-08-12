@@ -115,7 +115,7 @@ const centsDisplay = document.getElementById('cents-display');
 const freqDisplay = document.getElementById('freq-display');
 const statusBadge = document.getElementById('status-badge');
 const needle = document.getElementById('needle');
-const micBtn = document.getElementById('micBtn');
+const micBtn = document.getElementById('mic-btn');
 const manualHint = document.getElementById('manualHint');
 const appVersionEl = document.getElementById('appVersion');
 
