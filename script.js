@@ -117,7 +117,7 @@ const statusBadge = document.getElementById('status-badge');
 const needle = document.getElementById('needle');
 const micBtn = document.getElementById('mic-btn');
 const manualHint = document.getElementById('manual-hint');
-const appVersionEl = document.getElementById('appVersion');
+const appVersionEl = document.getElementById('app-version');
 
 function init() {
     appVersionEl.textContent = state.version;
