@@ -103,7 +103,7 @@ function freqToNoteAndCents(freq, baseA4 = state.a4Freq) {
     };
 }
 const instrumentSelect = document.getElementById('instrument-select');
-const tuningSelect = document.getElementById('tuningSelect');
+const tuningSelect = document.getElementById('tuning-select');
 const a4Slider = document.getElementById('a4Slider');
 const a4ValDisplay = document.getElementById('a4ValDisplay');
 const btnAuto = document.getElementById('btnAuto');
