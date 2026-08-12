@@ -104,7 +104,7 @@ function freqToNoteAndCents(freq, baseA4 = state.a4Freq) {
 }
 const instrumentSelect = document.getElementById('instrument-select');
 const tuningSelect = document.getElementById('tuning-select');
-const a4Slider = document.getElementById('a4Slider');
+const a4Slider = document.getElementById('a4-slider');
 const a4ValDisplay = document.getElementById('a4-val-display');
 const btnAuto = document.getElementById('btnAuto');
 const btnManual = document.getElementById('btnManual');
