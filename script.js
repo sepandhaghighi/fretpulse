@@ -102,22 +102,22 @@ function freqToNoteAndCents(freq, baseA4 = state.a4Freq) {
         targetFreq: targetFreq
     };
 }
-const instrumentSelect = document.getElementById('instrumentSelect');
-const tuningSelect = document.getElementById('tuningSelect');
-const a4Slider = document.getElementById('a4Slider');
-const a4ValDisplay = document.getElementById('a4ValDisplay');
-const btnAuto = document.getElementById('btnAuto');
-const btnManual = document.getElementById('btnManual');
-const customEditor = document.getElementById('customEditor');
-const stringsContainer = document.getElementById('stringsContainer');
-const noteDisplay = document.getElementById('noteDisplay');
-const centsDisplay = document.getElementById('centsDisplay');
-const freqDisplay = document.getElementById('freqDisplay');
-const statusBadge = document.getElementById('statusBadge');
+const instrumentSelect = document.getElementById('instrument-select');
+const tuningSelect = document.getElementById('tuning-select');
+const a4Slider = document.getElementById('a4-slider');
+const a4ValDisplay = document.getElementById('a4-val-display');
+const btnAuto = document.getElementById('btn-auto');
+const btnManual = document.getElementById('btn-manual');
+const customEditor = document.getElementById('custom-editor');
+const stringsContainer = document.getElementById('strings-container');
+const noteDisplay = document.getElementById('note-display');
+const centsDisplay = document.getElementById('cents-display');
+const freqDisplay = document.getElementById('freq-display');
+const statusBadge = document.getElementById('status-badge');
 const needle = document.getElementById('needle');
-const micBtn = document.getElementById('micBtn');
-const manualHint = document.getElementById('manualHint');
-const appVersionEl = document.getElementById('appVersion');
+const micBtn = document.getElementById('mic-btn');
+const manualHint = document.getElementById('manual-hint');
+const appVersionEl = document.getElementById('app-version');
 
 function init() {
     appVersionEl.textContent = state.version;
