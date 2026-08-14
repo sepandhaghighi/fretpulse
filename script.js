@@ -102,22 +102,25 @@ function freqToNoteAndCents(freq, baseA4 = state.a4Freq) {
         targetFreq: targetFreq
     };
 }
-const instrumentSelect = document.getElementById('instrument-select');
-const tuningSelect = document.getElementById('tuning-select');
-const a4Slider = document.getElementById('a4-slider');
-const a4ValDisplay = document.getElementById('a4-val-display');
-const btnAuto = document.getElementById('btn-auto');
-const btnManual = document.getElementById('btn-manual');
-const customEditor = document.getElementById('custom-editor');
-const stringsContainer = document.getElementById('strings-container');
-const noteDisplay = document.getElementById('note-display');
-const centsDisplay = document.getElementById('cents-display');
-const freqDisplay = document.getElementById('freq-display');
-const statusBadge = document.getElementById('status-badge');
-const needle = document.getElementById('needle');
-const micBtn = document.getElementById('mic-btn');
-const manualHint = document.getElementById('manual-hint');
-const appVersionEl = document.getElementById('app-version');
+
+const DOM = {
+    instrumentSelect: document.getElementById('instrument-select'),
+    tuningSelect: document.getElementById('tuning-select'),
+    a4Slider: document.getElementById('a4-slider'),
+    a4ValDisplay: document.getElementById('a4-val-display'),
+    btnAuto: document.getElementById('btn-auto'),
+    btnManual: document.getElementById('btn-manual'),
+    customEditor: document.getElementById('custom-editor'),
+    stringsContainer: document.getElementById('strings-container'),
+    noteDisplay: document.getElementById('note-display'),
+    centsDisplay: document.getElementById('cents-display'),
+    freqDisplay: document.getElementById('freq-display'),
+    statusBadge: document.getElementById('status-badge'),
+    needle: document.getElementById('needle'),
+    micBtn: document.getElementById('mic-btn'),
+    manualHint: document.getElementById('manual-hint'),
+    appVersionEl: document.getElementById('app-version'),
+}
 
 function init() {
     appVersionEl.textContent = state.version;
