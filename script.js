@@ -102,25 +102,28 @@ function freqToNoteAndCents(freq, baseA4 = state.a4Freq) {
         targetFreq: targetFreq
     };
 }
-const instrumentSelect = document.getElementById('instrument-select');
-const tuningSelect = document.getElementById('tuning-select');
-const a4Slider = document.getElementById('a4-slider');
-const a4ValDisplay = document.getElementById('a4-val-display');
-const btnAuto = document.getElementById('btn-auto');
-const btnManual = document.getElementById('btn-manual');
-const customEditor = document.getElementById('custom-editor');
-const stringsContainer = document.getElementById('strings-container');
-const noteDisplay = document.getElementById('note-display');
-const centsDisplay = document.getElementById('cents-display');
-const freqDisplay = document.getElementById('freq-display');
-const statusBadge = document.getElementById('status-badge');
-const needle = document.getElementById('needle');
-const micBtn = document.getElementById('mic-btn');
-const manualHint = document.getElementById('manual-hint');
-const appVersionEl = document.getElementById('app-version');
+
+const DOM = {
+    instrumentSelect: document.getElementById('instrument-select'),
+    tuningSelect: document.getElementById('tuning-select'),
+    a4Slider: document.getElementById('a4-slider'),
+    a4ValDisplay: document.getElementById('a4-val-display'),
+    btnAuto: document.getElementById('btn-auto'),
+    btnManual: document.getElementById('btn-manual'),
+    customEditor: document.getElementById('custom-editor'),
+    stringsContainer: document.getElementById('strings-container'),
+    noteDisplay: document.getElementById('note-display'),
+    centsDisplay: document.getElementById('cents-display'),
+    freqDisplay: document.getElementById('freq-display'),
+    statusBadge: document.getElementById('status-badge'),
+    needle: document.getElementById('needle'),
+    micBtn: document.getElementById('mic-btn'),
+    manualHint: document.getElementById('manual-hint'),
+    appVersionEl: document.getElementById('app-version'),
+}
 
 function init() {
-    appVersionEl.textContent = state.version;
+    DOM.appVersionEl.textContent = state.version;
     updateTuningOptions();
     renderFretboard();
     setupEventListeners();
@@ -128,7 +131,7 @@ function init() {
 }
 
 function setupEventListeners() {
-    instrumentSelect.addEventListener('change', (e) => {
+    DOM.instrumentSelect.addEventListener('change', (e) => {
         state.instrument = e.target.value;
         state.selectedStringIndex = 0;
         state.customNotes = [];
@@ -137,47 +140,47 @@ function setupEventListeners() {
         syncUIWithMode();
     });
 
-    tuningSelect.addEventListener('change', (e) => {
+    DOM.tuningSelect.addEventListener('change', (e) => {
         state.tuning = e.target.value;
         state.selectedStringIndex = 0;
         
         if (state.tuning === 'Custom') {
             setupCustomEditor();
         } else {
-            customEditor.classList.remove('visible');
+            DOM.customEditor.classList.remove('visible');
         }
         renderFretboard();
         syncUIWithMode();
     });
 
-    a4Slider.addEventListener('input', (e) => {
+    DOM.a4Slider.addEventListener('input', (e) => {
         state.a4Freq = parseInt(e.target.value);
-        a4ValDisplay.textContent = `${state.a4Freq} Hz`;
+        DOM.a4ValDisplay.textContent = `${state.a4Freq} Hz`;
         renderFretboard();
         if (state.mode === 'manual') {
             const notes = getCurrentTuningNotes();
             updateTargetDisplay(notes[state.selectedStringIndex]);
         } else if (!state.isListening) {
-            statusBadge.textContent = `Reference A4 = ${state.a4Freq} Hz`;
+            DOM.statusBadge.textContent = `Reference A4 = ${state.a4Freq} Hz`;
         }
     });
 
-    btnAuto.addEventListener('click', () => {
+    DOM.btnAuto.addEventListener('click', () => {
         setMode('auto');
     });
 
-    btnManual.addEventListener('click', () => {
+    DOM.btnManual.addEventListener('click', () => {
         setMode('manual');
     });
 
-    micBtn.addEventListener('click', toggleMicrophone);
+    DOM.micBtn.addEventListener('click', toggleMicrophone);
 }
 
 function setMode(newMode) {
     state.mode = newMode;
-    btnAuto.classList.toggle('active', newMode === 'auto');
-    btnManual.classList.toggle('active', newMode === 'manual');
-    manualHint.style.display = newMode === 'manual' ? 'inline' : 'none';
+    DOM.btnAuto.classList.toggle('active', newMode === 'auto');
+    DOM.btnManual.classList.toggle('active', newMode === 'manual');
+    DOM.manualHint.style.display = newMode === 'manual' ? 'inline' : 'none';
 
     renderFretboard();
     syncUIWithMode();
@@ -193,15 +196,15 @@ function syncUIWithMode() {
         updateTargetDisplay(notes[state.selectedStringIndex]);
     } else {
         if (!state.isListening) {
-            noteDisplay.textContent = '--';
-            centsDisplay.textContent = '0 Cents';
-            freqDisplay.textContent = '0.0 Hz';
-            needle.style.transform = 'rotate(0deg)';
-            statusBadge.textContent = `Reference A4 = ${state.a4Freq} Hz`;
-            statusBadge.className = 'status-badge';
+            DOM.noteDisplay.textContent = '--';
+            DOM.centsDisplay.textContent = '0 Cents';
+            DOM.freqDisplay.textContent = '0.0 Hz';
+            DOM.needle.style.transform = 'rotate(0deg)';
+            DOM.statusBadge.textContent = `Reference A4 = ${state.a4Freq} Hz`;
+            DOM.statusBadge.className = 'status-badge';
         } else {
-            statusBadge.textContent = 'Listening for instrument...';
-            statusBadge.className = 'status-badge';
+            DOM.statusBadge.textContent = 'Listening for instrument...';
+            DOM.statusBadge.className = 'status-badge';
         }
     }
 }
@@ -220,25 +223,25 @@ function getCurrentTuningNotes() {
 
 function updateTuningOptions() {
     const inst = INSTRUMENTS[state.instrument];
-    tuningSelect.innerHTML = '';
+    DOM.tuningSelect.innerHTML = '';
     
     const tuningKeys = Object.keys(inst.tunings);
     tuningKeys.forEach(t => {
         const opt = document.createElement('option');
         opt.value = t;
         opt.textContent = t;
-        tuningSelect.appendChild(opt);
+        DOM.tuningSelect.appendChild(opt);
     });
     
     state.tuning = tuningKeys[0];
-    tuningSelect.value = state.tuning;
-    customEditor.classList.remove('visible');
+    DOM.tuningSelect.value = state.tuning;
+    DOM.customEditor.classList.remove('visible');
 }
 
 function setupCustomEditor() {
     const currentNotes = getCurrentTuningNotes();
-    customEditor.innerHTML = '';
-    customEditor.classList.add('visible');
+    DOM.customEditor.innerHTML = '';
+    DOM.customEditor.classList.add('visible');
 
     currentNotes.forEach((note, idx) => {
         const div = document.createElement('div');
@@ -270,12 +273,12 @@ function setupCustomEditor() {
 
         div.appendChild(label);
         div.appendChild(select);
-        customEditor.appendChild(div);
+        DOM.customEditor.appendChild(div);
     });
 }
 
 function renderFretboard() {
-    stringsContainer.innerHTML = '';
+    DOM.stringsContainer.innerHTML = '';
     const notes = getCurrentTuningNotes();
 
     if (state.selectedStringIndex >= notes.length) {
@@ -312,18 +315,18 @@ function renderFretboard() {
             }
         });
 
-        stringsContainer.appendChild(stringWrap);
+        DOM.stringsContainer.appendChild(stringWrap);
     });
 }
 
 function updateTargetDisplay(targetNote) {
-    noteDisplay.textContent = targetNote;
-    centsDisplay.textContent = 'Reference Pitch';
-    freqDisplay.textContent = `${noteToFreq(targetNote).toFixed(1)} Hz`;
-    needle.style.transform = `rotate(0deg)`;
-    needle.style.backgroundColor = 'var(--accent-blue)';
-    statusBadge.textContent = state.isListening ? `Listening for target: ${targetNote}` : `Reference A4 = ${state.a4Freq} Hz`;
-    statusBadge.className = 'status-badge';
+    DOM.noteDisplay.textContent = targetNote;
+    DOM.centsDisplay.textContent = 'Reference Pitch';
+    DOM.freqDisplay.textContent = `${noteToFreq(targetNote).toFixed(1)} Hz`;
+    DOM.needle.style.transform = `rotate(0deg)`;
+    DOM.needle.style.backgroundColor = 'var(--accent-blue)';
+    DOM.statusBadge.textContent = state.isListening ? `Listening for target: ${targetNote}` : `Reference A4 = ${state.a4Freq} Hz`;
+    DOM.statusBadge.className = 'status-badge';
 }
 
 
@@ -428,8 +431,8 @@ async function startMicrophone() {
         source.connect(state.analyser);
 
         state.isListening = true;
-        micBtn.textContent = 'Stop Microphone';
-        micBtn.classList.add('listening');
+        DOM.micBtn.textContent = 'Stop Microphone';
+        DOM.micBtn.classList.add('listening');
 
         syncUIWithMode();
         processAudio();
@@ -449,8 +452,8 @@ function stopMicrophone() {
         cancelAnimationFrame(state.animFrame);
     }
     state.isListening = false;
-    micBtn.textContent = 'Start Microphone';
-    micBtn.classList.remove('listening');
+    DOM.micBtn.textContent = 'Start Microphone';
+    DOM.micBtn.classList.remove('listening');
     
     syncUIWithMode();
 }
@@ -534,33 +537,33 @@ function processAudio() {
 }
 
 function updateDisplay(data) {
-    noteDisplay.textContent = data.note;
-    freqDisplay.textContent = `${data.freq.toFixed(1)} Hz`;
+    DOM.noteDisplay.textContent = data.note;
+    DOM.freqDisplay.textContent = `${data.freq.toFixed(1)} Hz`;
 
     const clampedCents = Math.max(-50, Math.min(50, data.cents));
     const angle = (clampedCents / 50) * 60;
-    needle.style.transform = `rotate(${angle}deg)`;
+    DOM.needle.style.transform = `rotate(${angle}deg)`;
 
     const absCents = Math.abs(data.cents);
 
     if (absCents <= 5) {
-        centsDisplay.textContent = 'In Tune!';
-        centsDisplay.style.color = 'var(--accent-green)';
-        needle.style.backgroundColor = 'var(--accent-green)';
-        statusBadge.textContent = 'PERFECT!';
-        statusBadge.className = 'status-badge in-tune';
+        DOM.centsDisplay.textContent = 'In Tune!';
+        DOM.centsDisplay.style.color = 'var(--accent-green)';
+        DOM.needle.style.backgroundColor = 'var(--accent-green)';
+        DOM.statusBadge.textContent = 'PERFECT!';
+        DOM.statusBadge.className = 'status-badge in-tune';
     } else if (data.cents < 0) {
-        centsDisplay.textContent = `${data.cents} Cents (Flat)`;
-        centsDisplay.style.color = 'var(--accent-yellow)';
-        needle.style.backgroundColor = 'var(--accent-yellow)';
-        statusBadge.textContent = 'TUNE UP ↑';
-        statusBadge.className = 'status-badge';
+        DOM.centsDisplay.textContent = `${data.cents} Cents (Flat)`;
+        DOM.centsDisplay.style.color = 'var(--accent-yellow)';
+        DOM.needle.style.backgroundColor = 'var(--accent-yellow)';
+        DOM.statusBadge.textContent = 'TUNE UP ↑';
+        DOM.statusBadge.className = 'status-badge';
     } else {
-        centsDisplay.textContent = `+${data.cents} Cents (Sharp)`;
-        centsDisplay.style.color = 'var(--accent-red)';
-        needle.style.backgroundColor = 'var(--accent-red)';
-        statusBadge.textContent = 'TUNE DOWN ↓';
-        statusBadge.className = 'status-badge';
+        DOM.centsDisplay.textContent = `+${data.cents} Cents (Sharp)`;
+        DOM.centsDisplay.style.color = 'var(--accent-red)';
+        DOM.needle.style.backgroundColor = 'var(--accent-red)';
+        DOM.statusBadge.textContent = 'TUNE DOWN ↓';
+        DOM.statusBadge.className = 'status-badge';
     }
 
     if (state.mode === 'auto') {
