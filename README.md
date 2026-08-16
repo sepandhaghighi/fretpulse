@@ -16,7 +16,7 @@ FretPulse is a browser-based professional multi-instrument tuner built with Web 
 	<tr> 
 		<td align="center">Code Quality</td>
 		<td align="center"><a href="https://www.codefactor.io/repository/github/sepandhaghighi/fretpulse"><img src="https://www.codefactor.io/repository/github/sepandhaghighi/fretpulse/badge" alt="CodeFactor"></a></td>
-		<td align="center"></td>
+		<td align="center"><a href="https://app.codacy.com/gh/sepandhaghighi/fretpulse/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/2386a900f8734747896f9e1fa8dea5a0"></a></td>
 	</tr>
 </table>
 
