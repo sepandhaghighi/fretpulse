@@ -12,6 +12,15 @@
 FretPulse is a browser-based professional multi-instrument tuner built with Web Audio API. It provides real-time pitch detection through your microphone, automatic and manual tuning modes, adjustable A4 calibration, multiple instrument and tuning presets, custom tunings, and an interactive fretboard with reference tones for guitar, bass, and ukulele.
 
 
+<table>
+	<tr> 
+		<td align="center">Code Quality</td>
+		<td align="center"></td>
+		<td align="center"></td>
+	</tr>
+</table>
+
+
 ## Features
 
 * **Multi-Instrument Support** - Tune acoustic guitar, electric guitar, bass guitar, and ukulele
