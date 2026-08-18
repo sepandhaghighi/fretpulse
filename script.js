@@ -130,6 +130,13 @@ function init() {
     syncUIWithMode();
 }
 
+function setStatus(text, inTune = false) {
+    DOM.statusBadge.textContent = text;
+    DOM.statusBadge.className = inTune
+        ? 'status-badge in-tune'
+        : 'status-badge';
+}
+
 function setupEventListeners() {
     DOM.instrumentSelect.addEventListener('change', (e) => {
         state.instrument = e.target.value;
