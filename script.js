@@ -424,13 +424,14 @@ async function toggleMicrophone() {
 async function startMicrophone() {
     try {
         state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
         state.analyser = state.audioCtx.createAnalyser();
         state.analyser.fftSize = 2048;
 
-        state.micStream = await navigator.mediaDevices.getUserMedia({ 
-            audio: { echoCancellation: true, noiseSuppression: true } 
+        state.micStream = await navigator.mediaDevices.getUserMedia({
+            audio: { echoCancellation: true, noiseSuppression: true }
         });
-        
+
         const source = state.audioCtx.createMediaStreamSource(state.micStream);
         source.connect(state.analyser);
 
@@ -441,6 +442,19 @@ async function startMicrophone() {
         syncUIWithMode();
         processAudio();
     } catch (err) {
+        if (state.micStream) {
+            state.micStream.getTracks().forEach(track => track.stop());
+            state.micStream = null;
+        }
+
+        if (state.audioCtx) {
+            await state.audioCtx.close();
+            state.audioCtx = null;
+        }
+
+        state.analyser = null;
+        state.isListening = false;
+
         alert('Microphone access is required for pitch detection: ' + err.message);
     }
 }
