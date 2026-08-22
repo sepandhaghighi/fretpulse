@@ -130,6 +130,13 @@ function init() {
     syncUIWithMode();
 }
 
+function setStatus(text, inTune = false) {
+    DOM.statusBadge.textContent = text;
+    DOM.statusBadge.className = inTune
+        ? 'status-badge in-tune'
+        : 'status-badge';
+}
+
 function setupEventListeners() {
     DOM.instrumentSelect.addEventListener('change', (e) => {
         state.instrument = e.target.value;
@@ -200,11 +207,9 @@ function syncUIWithMode() {
             DOM.centsDisplay.textContent = '0 Cents';
             DOM.freqDisplay.textContent = '0.0 Hz';
             DOM.needle.style.transform = 'rotate(0deg)';
-            DOM.statusBadge.textContent = `Reference A4 = ${state.a4Freq} Hz`;
-            DOM.statusBadge.className = 'status-badge';
+            setStatus(`Reference A4 = ${state.a4Freq} Hz`);
         } else {
-            DOM.statusBadge.textContent = 'Listening for instrument...';
-            DOM.statusBadge.className = 'status-badge';
+            setStatus('Listening for instrument...');
         }
     }
 }
@@ -325,8 +330,7 @@ function updateTargetDisplay(targetNote) {
     DOM.freqDisplay.textContent = `${noteToFreq(targetNote).toFixed(1)} Hz`;
     DOM.needle.style.transform = `rotate(0deg)`;
     DOM.needle.style.backgroundColor = 'var(--accent-blue)';
-    DOM.statusBadge.textContent = state.isListening ? `Listening for target: ${targetNote}` : `Reference A4 = ${state.a4Freq} Hz`;
-    DOM.statusBadge.className = 'status-badge';
+    setStatus(state.isListening ? `Listening for target: ${targetNote}` : `Reference A4 = ${state.a4Freq} Hz`);
 }
 
 
@@ -550,20 +554,17 @@ function updateDisplay(data) {
         DOM.centsDisplay.textContent = 'In Tune!';
         DOM.centsDisplay.style.color = 'var(--accent-green)';
         DOM.needle.style.backgroundColor = 'var(--accent-green)';
-        DOM.statusBadge.textContent = 'PERFECT!';
-        DOM.statusBadge.className = 'status-badge in-tune';
+        setStatus('PERFECT!', true);
     } else if (data.cents < 0) {
         DOM.centsDisplay.textContent = `${data.cents} Cents (Flat)`;
         DOM.centsDisplay.style.color = 'var(--accent-yellow)';
         DOM.needle.style.backgroundColor = 'var(--accent-yellow)';
-        DOM.statusBadge.textContent = 'TUNE UP ↑';
-        DOM.statusBadge.className = 'status-badge';
+        setStatus('TUNE UP ↑');
     } else {
         DOM.centsDisplay.textContent = `+${data.cents} Cents (Sharp)`;
         DOM.centsDisplay.style.color = 'var(--accent-red)';
         DOM.needle.style.backgroundColor = 'var(--accent-red)';
-        DOM.statusBadge.textContent = 'TUNE DOWN ↓';
-        DOM.statusBadge.className = 'status-badge';
+        setStatus('TUNE DOWN ↓');
     }
 
     if (state.mode === 'auto') {
