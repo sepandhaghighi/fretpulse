@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `setStatus` function
 ### Changed
 - `README.md` updated
+- `startMicrophone` function modified
 ## [0.1] - 2026-08-10
 ### Added
 - Multi-Instrument support
