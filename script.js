@@ -440,7 +440,7 @@ async function startMicrophone() {
 
         syncUIWithMode();
         processAudio();
-    } catch (err) {
+    } catch (error) {
         if (state.micStream) {
             state.micStream.getTracks().forEach(track => track.stop());
             state.micStream = null;
@@ -454,7 +454,7 @@ async function startMicrophone() {
         state.analyser = null;
         state.isListening = false;
 
-        alert('Microphone access is required for pitch detection: ' + err.message);
+        alert('Microphone access is required for pitch detection: ' + error.message);
     }
 }
 
