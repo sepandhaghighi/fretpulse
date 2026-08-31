@@ -272,6 +272,18 @@ button.active {
     margin-bottom: 20px;
 }
 
+.neck-title {
+    font-weight: bold;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.manual-hint {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    display: none;
+}
+
 .fretboard-wrapper {
     background: var(--fretboard-wood);
     border-radius: 8px;
