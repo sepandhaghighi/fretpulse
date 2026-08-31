@@ -85,6 +85,7 @@ body:
       label: FretPulse version
       description: Which version of FretPulse are you using?
       options:
+        - FretPulse 0.2
         - FretPulse 0.1
       default: 0
     validations:
