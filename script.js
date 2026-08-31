@@ -461,17 +461,25 @@ async function startMicrophone() {
 function stopMicrophone() {
     if (state.micStream) {
         state.micStream.getTracks().forEach(track => track.stop());
+        state.micStream = null;
     }
+
     if (state.audioCtx) {
         state.audioCtx.close();
+        state.audioCtx = null;
     }
+
+    state.analyser = null;
+
     if (state.animFrame) {
         cancelAnimationFrame(state.animFrame);
+        state.animFrame = null;
     }
+
     state.isListening = false;
     DOM.micBtn.textContent = 'Start Microphone';
     DOM.micBtn.classList.remove('listening');
-    
+
     syncUIWithMode();
 }
 
