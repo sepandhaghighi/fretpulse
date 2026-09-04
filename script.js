@@ -564,7 +564,8 @@ function processAudio() {
     const pitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
 
     if (pitch !== -1 && state.mode === 'auto') {
-        const result = freqToNoteAndCents(pitch, state.a4Freq);
+        const result = findClosestTarget(pitch);
+
         if (result) {
             updateDisplay(result);
         }
