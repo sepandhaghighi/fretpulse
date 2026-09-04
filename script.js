@@ -226,6 +226,33 @@ function getCurrentTuningNotes() {
     return inst.tunings[state.tuning] || Object.values(inst.tunings)[0];
 }
 
+function findClosestTarget(pitch) {
+    const targetNotes = getCurrentTuningNotes();
+
+    let closest = null;
+    let smallestAbsCents = Infinity;
+
+    targetNotes.forEach((targetNote, index) => {
+        const targetFreq = noteToFreq(targetNote, state.a4Freq);
+        const cents = 1200 * Math.log2(pitch / targetFreq);
+        const absCents = Math.abs(cents);
+
+        if (absCents < smallestAbsCents) {
+            smallestAbsCents = absCents;
+
+            closest = {
+                note: targetNote,
+                cents: Math.round(cents),
+                freq: pitch,
+                targetFreq: targetFreq,
+                stringIndex: index
+            };
+        }
+    });
+
+    return closest;
+}
+
 function updateTuningOptions() {
     const inst = INSTRUMENTS[state.instrument];
     DOM.tuningSelect.innerHTML = '';
