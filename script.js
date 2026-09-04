@@ -616,11 +616,9 @@ function updateDisplay(data) {
         setStatus('TUNE DOWN ↓');
     }
 
-    if (state.mode === 'auto') {
-        const notes = getCurrentTuningNotes();
-        const matchIndex = notes.findIndex(n => n === data.note);
+    if (state.mode === 'auto' && data.stringIndex !== undefined) {
         document.querySelectorAll('.string-wrapper').forEach((sw, idx) => {
-            sw.classList.toggle('active', idx === matchIndex);
+            sw.classList.toggle('active', idx === data.stringIndex);
         });
     }
 }
