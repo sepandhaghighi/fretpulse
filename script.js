@@ -226,6 +226,33 @@ function getCurrentTuningNotes() {
     return inst.tunings[state.tuning] || Object.values(inst.tunings)[0];
 }
 
+function findClosestTarget(pitch) {
+    const targetNotes = getCurrentTuningNotes();
+
+    let closest = null;
+    let smallestAbsCents = Infinity;
+
+    targetNotes.forEach((targetNote, index) => {
+        const targetFreq = noteToFreq(targetNote, state.a4Freq);
+        const cents = 1200 * Math.log2(pitch / targetFreq);
+        const absCents = Math.abs(cents);
+
+        if (absCents < smallestAbsCents) {
+            smallestAbsCents = absCents;
+
+            closest = {
+                note: targetNote,
+                cents: Math.round(cents),
+                freq: pitch,
+                targetFreq: targetFreq,
+                stringIndex: index
+            };
+        }
+    });
+
+    return closest;
+}
+
 function updateTuningOptions() {
     const inst = INSTRUMENTS[state.instrument];
     DOM.tuningSelect.innerHTML = '';
@@ -537,7 +564,8 @@ function processAudio() {
     const pitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
 
     if (pitch !== -1 && state.mode === 'auto') {
-        const result = freqToNoteAndCents(pitch, state.a4Freq);
+        const result = findClosestTarget(pitch);
+
         if (result) {
             updateDisplay(result);
         }
@@ -588,11 +616,9 @@ function updateDisplay(data) {
         setStatus('TUNE DOWN ↓');
     }
 
-    if (state.mode === 'auto') {
-        const notes = getCurrentTuningNotes();
-        const matchIndex = notes.findIndex(n => n === data.note);
+    if (state.mode === 'auto' && data.stringIndex !== undefined) {
         document.querySelectorAll('.string-wrapper').forEach((sw, idx) => {
-            sw.classList.toggle('active', idx === matchIndex);
+            sw.classList.toggle('active', idx === data.stringIndex);
         });
     }
 }
