@@ -67,6 +67,20 @@ FretPulse is a browser-based professional multi-instrument tuner built with Web 
 * **Custom Tuning**: Choose a target note for each string when using the Custom tuning preset
 
 
+## Keyboard Shortcuts
+
+| Action                  | Shortcut         |
+| ----------------------- | ---------------- |
+| Start / Stop Microphone | <kbd>Space</kbd> |
+| Switch to Auto Mode     | <kbd>A</kbd>     |
+| Switch to Manual Mode   | <kbd>M</kbd>     |
+| Select Previous String  | <kbd>←</kbd>     |
+| Select Next String      | <kbd>→</kbd>     |
+
+
+> [!NOTE]
+> Keyboard shortcuts are disabled while typing in an input field or interacting with a dropdown menu.
+
 
 ## Local Development
 
