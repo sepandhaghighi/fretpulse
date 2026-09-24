@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `processAudio` function modified
 - `updateDisplay` function modified
 - Auto mode bug fixed
+- `README.md` updated
 ## [0.2] - 2026-09-03
 ### Added
 - `setStatus` function
