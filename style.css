@@ -403,6 +403,12 @@ button.active {
     color: #fff;
 }
 
+.keyboard-hint {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
 footer {
     margin-top: 30px;
     padding: 10px;

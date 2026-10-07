@@ -181,6 +181,32 @@ function setupEventListeners() {
     });
 
     DOM.micBtn.addEventListener('click', toggleMicrophone);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.target.matches('input, select, textarea')) return;
+
+        if (e.code === 'Space') {
+            e.preventDefault();
+            toggleMicrophone();
+        }
+
+        if (e.key.toLowerCase() === 'a') {
+            setMode('auto');
+        }
+
+        if (e.key.toLowerCase() === 'm') {
+            setMode('manual');
+        }
+
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            const notes = getCurrentTuningNotes();
+            if (state.mode !== 'manual' || !notes.length) return;
+            const direction = e.key === 'ArrowRight' ? 1 : -1;
+            state.selectedStringIndex = (state.selectedStringIndex + direction + notes.length) % notes.length;
+            renderFretboard();
+            updateTargetDisplay(notes[state.selectedStringIndex]);
+        }
+    });
 }
 
 function setMode(newMode) {
