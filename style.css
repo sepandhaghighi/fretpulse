@@ -298,6 +298,8 @@ button.active {
     font-size: 0.8rem;
     color: var(--accent-blue);
     display: none;
+    position: absolute;
+    right: 0;
 }
 
 .fretboard-wrapper {
