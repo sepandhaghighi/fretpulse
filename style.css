@@ -286,6 +286,7 @@ button.active {
     align-items: center;
     margin-bottom: 20px;
     position: relative;
+    flex-direction: column;
 }
 
 .neck-title {
@@ -298,8 +299,9 @@ button.active {
     font-size: 0.8rem;
     color: var(--accent-blue);
     display: none;
-    position: absolute;
+    position: relative;
     right: 0;
+    margin-top: 0.7rem;
 }
 
 .fretboard-wrapper {
