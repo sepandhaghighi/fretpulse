@@ -142,6 +142,21 @@ button.active {
     font-size: 0.9rem;
 }
 
+.control-group:has(#btn-auto) {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+}
+
+.control-group:has(#btn-auto) .btn-toggle-group {
+    width: min(185px, 100%);
+    justify-content: center;
+}
+
+.control-group:has(#btn-auto) .btn-toggle-group button {
+    text-align: center;
+}
+
 /* Calibration Controls */
 .calibration-controls {
     display: flex;
@@ -267,9 +282,11 @@ button.active {
 
 .neck-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+    flex-direction: column;
 }
 
 .neck-title {
@@ -282,6 +299,9 @@ button.active {
     font-size: 0.8rem;
     color: var(--accent-blue);
     display: none;
+    position: relative;
+    right: 0;
+    margin-top: 0.7rem;
 }
 
 .fretboard-wrapper {
