@@ -532,6 +532,8 @@ function stopMicrophone() {
     }
 
     state.isListening = false;
+    state.pitchHistory = [];
+    state.lastStablePitch = null;
     DOM.micBtn.textContent = 'Start Microphone';
     DOM.micBtn.classList.remove('listening');
 
