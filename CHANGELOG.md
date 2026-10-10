@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `findClosestTarget` function
+- `smoothPitch` function
 - Keyboard shortcuts
 ### Changed
 - `processAudio` function modified
 - `updateDisplay` function modified
+- `startMicrophone` function modified
+- `stopMicrophone` function modified
+- `autoCorrelate` function modified
 - Auto mode bug fixed
 - Style bugs fixed
 - `README.md` updated
