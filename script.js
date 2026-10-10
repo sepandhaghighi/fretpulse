@@ -494,6 +494,8 @@ async function startMicrophone() {
         DOM.micBtn.classList.add('listening');
 
         syncUIWithMode();
+        state.pitchHistory = [];
+        state.lastStablePitch = null;
         processAudio();
     } catch (error) {
         if (state.micStream) {
@@ -508,6 +510,8 @@ async function startMicrophone() {
 
         state.analyser = null;
         state.isListening = false;
+        state.pitchHistory = [];
+        state.lastStablePitch = null;
 
         alert('Microphone access is required for pitch detection: ' + error.message);
     }
