@@ -615,7 +615,8 @@ function smoothPitch(pitch) {
 function processAudio() {
     const buffer = new Float32Array(state.analyser.fftSize);
     state.analyser.getFloatTimeDomainData(buffer);
-    const pitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
+    const detectedPitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
+    const pitch = detectedPitch > 0 ? smoothPitch(detectedPitch) : -1;
 
     if (pitch !== -1 && state.mode === 'auto') {
         const result = findClosestTarget(pitch);
