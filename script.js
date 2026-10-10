@@ -480,7 +480,7 @@ async function startMicrophone() {
     try {
         state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         state.analyser = state.audioCtx.createAnalyser();
-        state.analyser.fftSize = 2048;
+        state.analyser.fftSize = 8192;
 
         state.micStream = await navigator.mediaDevices.getUserMedia({
             audio: { echoCancellation: true, noiseSuppression: true }
