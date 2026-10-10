@@ -71,7 +71,9 @@ let state = {
     audioCtx: null,
     analyser: null,
     micStream: null,
-    animFrame: null
+    animFrame: null,
+    pitchHistory: [],
+    lastStablePitch: null,
 };
 
 function noteToFreq(note, baseA4 = state.a4Freq) {
