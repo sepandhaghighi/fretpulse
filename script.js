@@ -599,6 +599,19 @@ function autoCorrelate(buf, sampleRate) {
     return refinedLag > 0 ? sampleRate / refinedLag : -1;
 }
 
+
+function smoothPitch(pitch) {
+    state.pitchHistory.push(pitch);
+
+    if (state.pitchHistory.length > 5) {
+        state.pitchHistory.shift();
+    }
+
+    const sorted = [...state.pitchHistory].sort((a, b) => a - b);
+    return sorted[Math.floor(sorted.length / 2)];
+}
+
+
 function processAudio() {
     const buffer = new Float32Array(state.analyser.fftSize);
     state.analyser.getFloatTimeDomainData(buffer);
