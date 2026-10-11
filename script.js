@@ -71,7 +71,9 @@ let state = {
     audioCtx: null,
     analyser: null,
     micStream: null,
-    animFrame: null
+    animFrame: null,
+    pitchHistory: [],
+    lastStablePitch: null,
 };
 
 function noteToFreq(note, baseA4 = state.a4Freq) {
@@ -478,7 +480,7 @@ async function startMicrophone() {
     try {
         state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         state.analyser = state.audioCtx.createAnalyser();
-        state.analyser.fftSize = 2048;
+        state.analyser.fftSize = 8192;
 
         state.micStream = await navigator.mediaDevices.getUserMedia({
             audio: { echoCancellation: true, noiseSuppression: true }
@@ -492,6 +494,8 @@ async function startMicrophone() {
         DOM.micBtn.classList.add('listening');
 
         syncUIWithMode();
+        state.pitchHistory = [];
+        state.lastStablePitch = null;
         processAudio();
     } catch (error) {
         if (state.micStream) {
@@ -506,6 +510,8 @@ async function startMicrophone() {
 
         state.analyser = null;
         state.isListening = false;
+        state.pitchHistory = [];
+        state.lastStablePitch = null;
 
         alert('Microphone access is required for pitch detection: ' + error.message);
     }
@@ -530,64 +536,93 @@ function stopMicrophone() {
     }
 
     state.isListening = false;
+    state.pitchHistory = [];
+    state.lastStablePitch = null;
     DOM.micBtn.textContent = 'Start Microphone';
     DOM.micBtn.classList.remove('listening');
 
     syncUIWithMode();
 }
 
+
 function autoCorrelate(buf, sampleRate) {
-    let SIZE = buf.length;
+    const SIZE = buf.length;
+
     let rms = 0;
-
     for (let i = 0; i < SIZE; i++) {
-        const val = buf[i];
-        rms += val * val;
+        rms += buf[i] * buf[i];
     }
+
     rms = Math.sqrt(rms / SIZE);
-    if (rms < 0.01) return -1;
+    if (rms < 0.015) return -1;
 
-    let r1 = 0, r2 = SIZE - 1, thres = 0.2;
-    for (let i = 0; i < SIZE / 2; i++) {
-        if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+    const minFreq = 35;
+    const maxFreq = 1000;
+    const minLag = Math.floor(sampleRate / maxFreq);
+    const maxLag = Math.min(Math.floor(sampleRate / minFreq), Math.floor(SIZE / 2));
+
+    const difference = new Float64Array(maxLag + 1);
+    const cmnd = new Float64Array(maxLag + 1);
+
+    for (let lag = 1; lag <= maxLag; lag++) {
+        let sum = 0;
+
+        for (let i = 0; i < SIZE - lag; i++) {
+            const delta = buf[i] - buf[i + lag];
+            sum += delta * delta;
+        }
+
+        difference[lag] = sum;
     }
-    for (let i = 1; i < SIZE / 2; i++) {
-        if (Math.abs(buf[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+
+    cmnd[0] = 1;
+    let runningSum = 0;
+
+    for (let lag = 1; lag <= maxLag; lag++) {
+        runningSum += difference[lag];
+        cmnd[lag] = runningSum ? difference[lag] * lag / runningSum : 1;
     }
 
-    buf = buf.slice(r1, r2);
-    SIZE = buf.length;
+    let bestLag = -1;
 
-    const c = new Array(SIZE).fill(0);
-    for (let i = 0; i < SIZE; i++) {
-        for (let j = 0; j < SIZE - i; j++) {
-            c[i] = c[i] + buf[j] * buf[j + i];
+    for (let lag = minLag; lag < maxLag; lag++) {
+        if (cmnd[lag] < 0.15 && cmnd[lag] <= cmnd[lag + 1]) {
+            bestLag = lag;
+            break;
         }
     }
 
-    let d = 0;
-    while (c[d] > c[d + 1]) d++;
-    let maxval = -1, maxpos = -1;
-    for (let i = d; i < SIZE; i++) {
-        if (c[i] > maxval) {
-            maxval = c[i];
-            maxpos = i;
-        }
-    }
-    let T0 = maxpos;
+    if (bestLag === -1) return -1;
 
-    const x1 = c[T0 - 1], x2 = c[T0], x3 = c[T0 + 1];
-    const a = (x1 + x3 - 2 * x2) / 2;
-    const b = (x3 - x1) / 2;
-    if (a) T0 = T0 - b / (2 * a);
+    const left = cmnd[bestLag - 1];
+    const center = cmnd[bestLag];
+    const right = cmnd[bestLag + 1];
 
-    return sampleRate / T0;
+    const denominator = left - 2 * center + right;
+    const correction = denominator ? 0.5 * (left - right) / denominator : 0;
+
+    const refinedLag = bestLag + correction;
+    return refinedLag > 0 ? sampleRate / refinedLag : -1;
 }
+
+
+function smoothPitch(pitch) {
+    state.pitchHistory.push(pitch);
+
+    if (state.pitchHistory.length > 5) {
+        state.pitchHistory.shift();
+    }
+
+    const sorted = [...state.pitchHistory].sort((a, b) => a - b);
+    return sorted[Math.floor(sorted.length / 2)];
+}
+
 
 function processAudio() {
     const buffer = new Float32Array(state.analyser.fftSize);
     state.analyser.getFloatTimeDomainData(buffer);
-    const pitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
+    const detectedPitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
+    const pitch = detectedPitch > 0 ? smoothPitch(detectedPitch) : -1;
 
     if (pitch !== -1 && state.mode === 'auto') {
         const result = findClosestTarget(pitch);
