@@ -490,7 +490,7 @@ async function startMicrophone() {
         source.connect(state.analyser);
 
         state.isListening = true;
-        DOM.micBtn.textContent = 'Stop Microphone';
+        DOM.micBtn.innerHTML = '<i class="fa-solid fa-stop" aria-hidden="true"></i> Stop Microphone';
         DOM.micBtn.classList.add('listening');
 
         syncUIWithMode();
@@ -512,6 +512,7 @@ async function startMicrophone() {
         state.isListening = false;
         state.pitchHistory = [];
         state.lastStablePitch = null;
+        DOM.micBtn.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i> Start Microphone';
 
         alert('Microphone access is required for pitch detection: ' + error.message);
     }
@@ -538,7 +539,7 @@ function stopMicrophone() {
     state.isListening = false;
     state.pitchHistory = [];
     state.lastStablePitch = null;
-    DOM.micBtn.textContent = 'Start Microphone';
+    DOM.micBtn.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i> Start Microphone';
     DOM.micBtn.classList.remove('listening');
 
     syncUIWithMode();
