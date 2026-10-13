@@ -436,3 +436,63 @@ footer {
     font-size: 0.85rem;
     text-align: center;
 }
+
+
+/* Subtle Font Awesome icon styling */
+
+header h1 i {
+    font-size: 0.82em;
+    margin-right: 5px;
+}
+
+.control-group label i {
+    color: var(--accent-blue);
+    margin-right: 4px;
+    font-size: 0.95em;
+}
+
+.btn-toggle-group button i {
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+
+.mic-btn i {
+    margin-right: 8px;
+}
+
+.keyboard-hint i {
+    font-size: 0.95em;
+    margin: 0 2px;
+}
+
+.neck-title i {
+    color: var(--accent-blue);
+    margin-right: 6px;
+}
+
+.manual-hint i {
+    margin-right: 5px;
+}
+
+footer i {
+    color: var(--accent-blue);
+    margin-right: 4px;
+}
+
+/* Consistent icon alignment */
+
+button i,
+label i,
+.neck-title i,
+.manual-hint i {
+    vertical-align: middle;
+}
+
+/* Accessible keyboard focus */
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 3px;
+}
