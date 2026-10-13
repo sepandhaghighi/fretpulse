@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `findClosestTarget` function
 - `smoothPitch` function
 - Keyboard shortcuts
+- Icons
 ### Changed
 - `processAudio` function modified
 - `updateDisplay` function modified
