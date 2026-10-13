@@ -7,6 +7,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="canonical" href="https://fretpulse.ir">
     <link rel="manifest" href="site.webmanifest">
+    <link href="libs/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="style.css" rel="stylesheet" type="text/css">
     <title>FretPulse: Professional Multi-Instrument Tuner</title>
     <meta charset="UTF-8">
@@ -29,14 +30,17 @@
 <body>
 
     <header>
-        <h1>FretPulse</h1>
+        <h1><i class="fa-solid fa-wave-square" aria-hidden="true"></i> FretPulse</h1>
         <p>Professional Multi-Instrument Web Tuner</p>
     </header>
 
     <div class="container">
         <div class="controls">
             <div class="control-group">
-                <label for="instrument-select">Instrument</label>
+                <label for="instrument-select">
+                    <i class="fa-solid fa-guitar" aria-hidden="true"></i>
+                    Instrument
+                </label>
                 <select id="instrument-select">
                     <option value="acoustic">Acoustic Guitar (6 String)</option>
                     <option value="electric">Electric Guitar (6 String)</option>
@@ -46,23 +50,40 @@
             </div>
 
             <div class="control-group">
-                <label for="tuning-select">Tuning Preset</label>
+                <label for="tuning-select">
+                    <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                    Tuning Preset
+                </label>
                 <select id="tuning-select">
                 </select>
             </div>
 
             <div class="control-group">
-                <label>Pitch A4 <span id="a4-val-display" class="freq-badge">440 Hz</span></label>
+                <label for="a4-slider">
+                    <i class="fa-solid fa-wave-square" aria-hidden="true"></i>
+                    Pitch A4
+                    <span id="a4-val-display" class="freq-badge">440 Hz</span>
+                </label>
                 <div class="calibration-controls">
-                    <input type="range" id="a4-slider" min="430" max="450" value="440" step="1">
+                    <input type="range" id="a4-slider"
+                        min="430" max="450" value="440" step="1">
                 </div>
             </div>
 
             <div class="control-group">
-                <label>Mode</label>
+                <label>
+                    <i class="fa-solid fa-crosshairs" aria-hidden="true"></i>
+                    Mode
+                </label>
                 <div class="btn-toggle-group">
-                    <button id="btn-auto" class="active">Auto</button>
-                    <button id="btn-manual">Manual</button>
+                    <button id="btn-auto" class="active" type="button">
+                        <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
+                        Auto
+                    </button>
+                    <button id="btn-manual" type="button">
+                        <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
+                        Manual
+                    </button>
                 </div>
             </div>
         </div>
@@ -81,25 +102,40 @@
             <div id="freq-display" class="freq-display">0.0 Hz</div>
             <div id="status-badge" class="status-badge">Reference A4 = 440 Hz</div>
 
-            <button id="mic-btn" class="mic-btn">Start Microphone</button>
+            <button id="mic-btn" class="mic-btn" type="button">
+                <i class="fa-solid fa-microphone" aria-hidden="true"></i>
+                Start Microphone
+            </button>
+
             <p class="keyboard-hint">
-                Space: Microphone • A: Auto • M: Manual • ← →: String
+                <i class="fa-regular fa-keyboard" aria-hidden="true"></i>
+                Space: Microphone &bull; A: Auto &bull; M: Manual
+                &bull; <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                : String
             </p>
+
         </div>
-        <div class="neck-card">
-            <div class="neck-header">
-                <span class="neck-title">INTERACTIVE FRETBOARD</span>
-                <span id="manual-hint" class="manual-hint">Click string peg to pluck reference tone</span>
-            </div>
-            <div class="fretboard-wrapper">
-                <div id="strings-container" class="strings-container">
-                </div>
-            </div>
+
+        <div class="neck-header">
+            <span class="neck-title">
+                <i class="fa-solid fa-guitar" aria-hidden="true"></i>
+                INTERACTIVE FRETBOARD
+            </span>
+            <span id="manual-hint" class="manual-hint">
+                <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
+                Click string peg to pluck reference tone
+            </span>
         </div>
+
     </div>
 
     <footer>
-        <p>FretPulse <span id="app-version"></span> • Professional Multi-Instrument Tuner</p>
+        <p>
+            <i class="fa-solid fa-wave-square" aria-hidden="true"></i>
+            FretPulse <span id="app-version"></span>
+            &bull; Professional Multi-Instrument Tuner
+        </p>
     </footer>
     <script src="script.js"></script>
 </body>
