@@ -140,6 +140,12 @@ button.active {
     flex: 1;
     padding: 8px;
     font-size: 0.9rem;
+    min-width: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .control-group:has(#btn-auto) {
@@ -454,6 +460,8 @@ header h1 i {
 .btn-toggle-group button i {
     margin-right: 5px;
     font-size: 0.9em;
+    margin-right: 0;
+    flex-shrink: 0;
 }
 
 .mic-btn i {
