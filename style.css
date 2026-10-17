@@ -443,9 +443,6 @@ footer {
     text-align: center;
 }
 
-
-/* Subtle Font Awesome icon styling */
-
 header h1 i {
     font-size: 0.82em;
     margin-right: 5px;
@@ -458,7 +455,6 @@ header h1 i {
 }
 
 .btn-toggle-group button i {
-    margin-right: 5px;
     font-size: 0.9em;
     margin-right: 0;
     flex-shrink: 0;
@@ -487,16 +483,12 @@ footer i {
     margin-right: 4px;
 }
 
-/* Consistent icon alignment */
-
 button i,
 label i,
 .neck-title i,
 .manual-hint i {
     vertical-align: middle;
 }
-
-/* Accessible keyboard focus */
 
 button:focus-visible,
 select:focus-visible,
