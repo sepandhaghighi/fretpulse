@@ -140,6 +140,12 @@ button.active {
     flex: 1;
     padding: 8px;
     font-size: 0.9rem;
+    min-width: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .control-group:has(#btn-auto) {
@@ -435,4 +441,58 @@ footer {
     color: var(--text-muted);
     font-size: 0.85rem;
     text-align: center;
+}
+
+header h1 i {
+    font-size: 0.82em;
+    margin-right: 5px;
+}
+
+.control-group label i {
+    color: var(--accent-blue);
+    margin-right: 4px;
+    font-size: 0.95em;
+}
+
+.btn-toggle-group button i {
+    font-size: 0.9em;
+    margin-right: 0;
+    flex-shrink: 0;
+}
+
+.mic-btn i {
+    margin-right: 8px;
+}
+
+.keyboard-hint i {
+    font-size: 0.95em;
+    margin: 0 2px;
+}
+
+.neck-title i {
+    color: var(--accent-blue);
+    margin-right: 6px;
+}
+
+.manual-hint i {
+    margin-right: 5px;
+}
+
+footer i {
+    color: var(--accent-blue);
+    margin-right: 4px;
+}
+
+button i,
+label i,
+.neck-title i,
+.manual-hint i {
+    vertical-align: middle;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 3px;
 }
