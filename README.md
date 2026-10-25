@@ -89,7 +89,7 @@ To test FretPulse locally, you can use [Ghps](https://github.com/sepandhaghighi/
 Run:
 
 ```console
-ghps --port 5003
+ghps --port=5003 --auto-open
 ```
 
 Then open your browser and visit:
@@ -97,6 +97,11 @@ Then open your browser and visit:
 ```console
 http://localhost:5003
 ```
+
+## Dependencies
+
+- [Font Awesome](https://fontawesome.com/) v7.2.0
+
 
 ## Issues & Bug Reports
 
