@@ -101,6 +101,7 @@ http://localhost:5003
 ## Dependencies
 
 - [Font Awesome](https://fontawesome.com/) v7.2.0
+- [SweetAlert2](https://sweetalert2.github.io/) v11.26.24
 
 
 ## Issues & Bug Reports
