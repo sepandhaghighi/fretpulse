@@ -496,3 +496,28 @@ input:focus-visible {
     outline: 2px solid var(--accent-blue);
     outline-offset: 3px;
 }
+
+.swal2-popup {
+    background: var(--card-bg) !important;
+    color: var(--text-light) !important;
+    border: 1px solid #2e3440 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
+}
+
+.swal2-title {
+    color: var(--text-light) !important;
+}
+
+.swal2-html-container {
+    color: var(--text-muted) !important;
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: var(--accent-blue) !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: none !important;
+}
