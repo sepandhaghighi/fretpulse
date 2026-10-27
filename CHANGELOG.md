@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `autoCorrelate` function modified
 - Auto mode bug fixed
 - Style bugs fixed
+- Modal style updated
 - `README.md` updated
 ## [0.2] - 2026-09-03
 ### Added

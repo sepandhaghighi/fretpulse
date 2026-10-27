@@ -514,7 +514,12 @@ async function startMicrophone() {
         state.lastStablePitch = null;
         DOM.micBtn.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i> Start Microphone';
 
-        alert('Microphone access is required for pitch detection: ' + error.message);
+        Swal.fire({
+            icon: 'error',
+            title: 'Microphone Error',
+            text: 'Microphone access is required for pitch detection: ' + error.message,
+            confirmButtonColor: 'var(--accent-blue)'
+        });
     }
 }
 
