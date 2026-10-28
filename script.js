@@ -1,4 +1,4 @@
-const FRETPULSE_VERSION = 'v0.2';
+const FRETPULSE_VERSION = 'v0.3';
 const INSTRUMENTS = {
     acoustic: {
         name: 'Acoustic Guitar',
