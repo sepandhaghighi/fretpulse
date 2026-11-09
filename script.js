@@ -117,6 +117,8 @@ const DOM = {
     noteDisplay: document.getElementById('note-display'),
     centsDisplay: document.getElementById('cents-display'),
     freqDisplay: document.getElementById('freq-display'),
+    micLevelMeter: document.getElementById('mic-level-meter'),
+    micLevelFill: document.getElementById('mic-level-fill'),
     statusBadge: document.getElementById('status-badge'),
     needle: document.getElementById('needle'),
     micBtn: document.getElementById('mic-btn'),
@@ -512,6 +514,8 @@ async function startMicrophone() {
         state.isListening = false;
         state.pitchHistory = [];
         state.lastStablePitch = null;
+        DOM.micLevelFill.style.width = '0%';
+        DOM.micLevelMeter.setAttribute('aria-valuenow', '0');
         DOM.micBtn.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i> Start Microphone';
 
         Swal.fire({
@@ -546,6 +550,8 @@ function stopMicrophone() {
     state.lastStablePitch = null;
     DOM.micBtn.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i> Start Microphone';
     DOM.micBtn.classList.remove('listening');
+    DOM.micLevelFill.style.width = '0%';
+    DOM.micLevelMeter.setAttribute('aria-valuenow', '0');
 
     syncUIWithMode();
 }
@@ -627,6 +633,25 @@ function smoothPitch(pitch) {
 function processAudio() {
     const buffer = new Float32Array(state.analyser.fftSize);
     state.analyser.getFloatTimeDomainData(buffer);
+    let sumSquares = 0;
+
+    for (let i = 0; i < buffer.length; i++) {
+        sumSquares += buffer[i] * buffer[i];
+    }
+
+    const rms = Math.sqrt(sumSquares / buffer.length);
+    const levelDb = rms > 0 ? 20 * Math.log10(rms) : -Infinity;
+
+    const inputLevel = Math.max(
+        0,
+        Math.min(100, ((levelDb + 60) / 54) * 100)
+    );
+
+    DOM.micLevelFill.style.width = `${inputLevel.toFixed(1)}%`;
+    DOM.micLevelMeter.setAttribute(
+        'aria-valuenow',
+        String(Math.round(inputLevel))
+    );
     const detectedPitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
     const pitch = detectedPitch > 0 ? smoothPitch(detectedPitch) : -1;
 
