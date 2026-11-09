@@ -41,6 +41,8 @@ FretPulse is a browser-based professional multi-instrument tuner built with Web 
 
 * **Visual Tuning Gauge** - Monitor pitch accuracy with a responsive needle and cent display
 
+* **Microphone Input-Level Indicator** - Display real-time microphone input levels with a minimal visual meter
+
 * **Instrument-Specific Sound** - Reference tones are synthesized with different decay and brightness characteristics for each instrument
 
 * **In-Tune Detection** - Clearly indicates when a note is within ±5 cents of the target pitch
@@ -61,6 +63,8 @@ FretPulse is a browser-based professional multi-instrument tuner built with Web 
 * **Manual**: Select a string from the interactive fretboard and tune to its reference pitch
 
 * **Start Microphone**: Grant microphone access and begin real-time pitch detection
+
+* **Microphone Input Level**: Monitor the incoming microphone signal using the visual input-level meter
 
 * **String Pegs**: Click a string on the fretboard to select it and play its synthesized reference tone
 
