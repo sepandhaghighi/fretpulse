@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Microphone input-level indicator
+### Changed
+- `processAudio` function modified
+- `startMicrophone` function modified
+- `stopMicrophone` function modified
+- `README.md` updated
 ## [0.3] - 2026-10-29
 ### Added
 - `findClosestTarget` function
