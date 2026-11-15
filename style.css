@@ -259,7 +259,7 @@ button.active {
     margin-top: 4px;
 }
 
-/* Microphone Input Level */
+
 .input-level {
     display: flex;
     flex-direction: column;
@@ -278,7 +278,7 @@ button.active {
 
 .input-level-meter {
     width: 100%;
-    height: 6px;
+    height: 0.75em;
     overflow: hidden;
     border-radius: 999px;
     background: #2a2f3a;
