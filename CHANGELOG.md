@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Microphone input-level indicator
+- `.ghps` config
 ### Changed
 - `processAudio` function modified
 - `startMicrophone` function modified
