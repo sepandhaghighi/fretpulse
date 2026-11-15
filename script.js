@@ -642,16 +642,10 @@ function processAudio() {
     const rms = Math.sqrt(sumSquares / buffer.length);
     const levelDb = rms > 0 ? 20 * Math.log10(rms) : -Infinity;
 
-    const inputLevel = Math.max(
-        0,
-        Math.min(100, ((levelDb + 60) / 54) * 100)
-    );
+    const inputLevel = Math.max(0, Math.min(100, ((levelDb + 60) / 54) * 100));
 
     DOM.micLevelFill.style.width = `${inputLevel.toFixed(1)}%`;
-    DOM.micLevelMeter.setAttribute(
-        'aria-valuenow',
-        String(Math.round(inputLevel))
-    );
+    DOM.micLevelMeter.setAttribute('aria-valuenow', String(Math.round(inputLevel)));
     const detectedPitch = autoCorrelate(buffer, state.audioCtx.sampleRate);
     const pitch = detectedPitch > 0 ? smoothPitch(detectedPitch) : -1;
 
